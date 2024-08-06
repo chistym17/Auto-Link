@@ -12,6 +12,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "database": "*",
+    "ui": "*",
     "express": "^4.19.2"
   },
   "devDependencies": {
