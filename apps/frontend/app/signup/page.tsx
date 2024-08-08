@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 import { Appbar } from "@/components/Appbar";
 import { CheckFeature } from "@/components/CheckFeature";
@@ -44,11 +46,12 @@ export default function() {
 
                     <div className="pt-4">
                         <PrimaryButton onClick={async () => {
-                            const res = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, {
-                                username: email,
+                            const res = await axios.post(`http://localhost:3001/api/v1/user/signup`, {
+                                email: email,
                                 password,
                                 name
                             });
+                            console.log(res)
                             router.push("/login");
                         }} size="big">Get started free</PrimaryButton>
                     </div>

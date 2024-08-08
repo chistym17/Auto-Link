@@ -74,6 +74,9 @@ CREATE TABLE "ZapRunOutbox" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Trigger_zapId_key" ON "Trigger"("zapId");
 
 -- CreateIndex

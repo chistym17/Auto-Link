@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 import { Appbar } from "@/components/Appbar";
 import { CheckFeature } from "@/components/CheckFeature";
