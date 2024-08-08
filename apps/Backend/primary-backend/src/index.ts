@@ -6,6 +6,44 @@ import cors from 'cors';
 const app = express();
 const port = 3001;
 
+async function main() {
+  // Create available triggers
+  const triggers = [
+      { id: "trigger_1", name: "New Form Submission", image: "/images/form.png" },
+      { id: "trigger_2", name: "New Email Received", image: "/images/email.png" }
+  ];
+
+  for (const trigger of triggers) {
+      await prisma.availableTrigger.create({
+          data: {
+              id: trigger.id,
+              name: trigger.name,
+              image: trigger.image
+          }
+      });
+  }
+
+  // Create available actions
+  const actions = [
+      { id: "action_1", name: "Send Email", image: "/images/send_email.png" },
+      { id: "action_2", name: "Send Solana", image: "/images/solana.png" }
+  ];
+
+  for (const action of actions) {
+      await prisma.availableAction.create({
+          data: {
+              id: action.id,
+              name: action.name,
+              image: action.image
+          }
+      });
+  }
+
+  console.log('Available triggers and actions have been created.');
+}
+
+
+
 app.use(express.json());
 
 app.use(cors({
@@ -49,47 +87,55 @@ app.post('/api/v1/user/signup', async (req: Request, res: Response) => {
 
 
 // Create a new Zap
-app.post("/", async (req, res) => {
-    const id = req.body.userId; // Assuming `userId` is passed in the request body
-    const body = req.body;
+app.post("/createzap", async (req, res) => {
+  const body = req.body;
 
-    const zapId = await prisma.$transaction(async tx => {
-        const zap = await prisma.zap.create({
-            data: {
-                userId: parseInt(id),
-                triggerId: "",
-                actions: {
-                    create: body.actions.map((x, index) => ({
-                        actionId: x.actionId,
-                        sortingOrder: index,
-                        metadata: x.metadata
-                    }))
-                }
-            }
-        });
+  try {
+      const { availableTriggerId, triggerMetadata, actions } = body;
 
-        const trigger = await tx.trigger.create({
-            data: {
-                triggerId: body.triggerId,
-                zapId: zap.id,
-            }
-        });
+      // Create zap and actions within a transaction
+      const zapId = await prisma.$transaction(async (tx) => {
+          // Create Zap
+          const zap = await tx.zap.create({
+              data: {
+                  userId: 1, // Replace with actual user ID
+                  triggerId: '', // This will be updated with the actual trigger ID later
+                  actions: {
+                      create: actions.map((action: any, index: number) => ({
+                          metadata: action.actionMetadata,
+                          sortingOrder: index,
+                          type: {
+                              connect: { id: action.availableActionId }, // Connect to the AvailableAction model
+                          },
+                      })),
+                  },
+              },
+          });
 
-        await tx.zap.update({
-            where: {
-                id: zap.id
-            },
-            data: {
-                triggerId: trigger.id
-            }
-        });
+          // Create Trigger
+          const trigger = await tx.trigger.create({
+              data: {
+                  zapId: zap.id,
+                  triggerId: availableTriggerId,
+                  metadata: triggerMetadata,
+                 
+              },
+          });
 
-        return zap.id;
-    });
+          // Update Zap with triggerId
+          await tx.zap.update({
+              where: { id: zap.id },
+              data: { triggerId: trigger.id },
+          });
 
-    return res.json({
-        zapId
-    });
+          return zap.id;
+      });
+
+      res.json({ zapId });
+  } catch (error) {
+      console.error('Error creating zap:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 // Get all Zaps for a user

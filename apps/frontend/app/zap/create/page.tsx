@@ -4,6 +4,7 @@ import { Appbar } from "@/components/Appbar";
 import { Input } from "@/components/Input";
 import { ZapCell } from "@/components/ZapCell";
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -19,6 +20,32 @@ const availableActions = [
 ];
 
 export default function Page() {
+
+    const handleCreateZap = async () => {
+        try {
+            const response = await axios.post(`http://localhost:3001/createzap`, {
+                "availableTriggerId": selectedTrigger.id,
+                "triggerMetadata": {},
+                "actions": selectedActions.map(a => ({
+                    availableActionId: a.availableActionId,
+                    actionMetadata: a.metadata
+                }))
+            });
+            console.log('Response:', response.data);
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.error('Error Response:', error.response?.data);
+                console.error('Error Status:', error.response?.status);
+                console.error('Error Headers:', error.response?.headers);
+            } else {
+                console.error('Unexpected Error:', error);
+            }
+        }
+    };
+    
+
+
+
     const router = useRouter();
     const [selectedTrigger, setSelectedTrigger] = useState<{ id: string; name: string; }>();
     const [selectedActions, setSelectedActions] = useState<{
@@ -33,27 +60,7 @@ export default function Page() {
         <div>
             <Appbar />
             <div className="flex justify-end bg-slate-200 p-4">
-                <PrimaryButton onClick={async () => {
-                    if (!selectedTrigger?.id) {
-                        return;
-                    }
-
-                    // Mock API call
-                    // const response = await axios.post(`${BACKEND_URL}/api/v1/zap`, {
-                    //     "availableTriggerId": selectedTrigger.id,
-                    //     "triggerMetadata": {},
-                    //     "actions": selectedActions.map(a => ({
-                    //         availableActionId: a.availableActionId,
-                    //         actionMetadata: a.metadata
-                    //     }))
-                    // }, {
-                    //     headers: {
-                    //         Authorization: localStorage.getItem("token")
-                    //     }
-                    // })
-                    
-                    router.push("/dashboard");
-                }}>Publish</PrimaryButton>
+                <PrimaryButton onClick={handleCreateZap}>Publish</PrimaryButton>
             </div>
             <div className="w-full min-h-screen bg-slate-200 flex flex-col justify-center">
                 <div className="flex justify-center w-full">
