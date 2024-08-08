@@ -131,7 +131,13 @@ app.post("/createzap", async (req, res) => {
           return zap.id;
       });
 
-      res.json({ zapId });
+        // Construct the webhook URL
+        const webhookUrl = `${req.protocol}://${req.get('host')}/hooks/catch/${1}/${zapId}`;
+
+        // Send the URL back to the user
+        res.json({ success: true, zapId, webhookUrl });
+
+      // res.json({ zapId });
   } catch (error) {
       console.error('Error creating zap:', error);
       res.status(500).json({ message: 'Internal Server Error' });
@@ -188,6 +194,7 @@ app.get("/:zapId", async (req, res) => {
             }
         }
     });
+
 
     return res.json({
         zap
