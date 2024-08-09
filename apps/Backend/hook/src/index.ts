@@ -1,11 +1,15 @@
 import { prisma } from '../../../../packages/database/src/client';
 import express, { Request, Response } from 'express';
-
+import cors from 'cors'
 const app = express();
 const PORT = process.env.PORT || 3002;
 
 app.use(express.json());
 
+app.use(cors({
+    origin: '*', // Allow all origins
+  }));
+  
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, TypeScript with Express!');
 });

@@ -1,9 +1,9 @@
 "use client";
 
-import { Appbar } from "@/components/Appbar";
-import { Input } from "@/components/Input";
-import { ZapCell } from "@/components/ZapCell";
-import { PrimaryButton } from "@/components/buttons/PrimaryButton";
+import { Appbar } from "../../../components/Appbar";
+import { Input } from "../../../components/Input";
+import { ZapCell } from "../../../components/ZapCell";
+import { PrimaryButton } from "../../../components/buttons/PrimaryButton";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
