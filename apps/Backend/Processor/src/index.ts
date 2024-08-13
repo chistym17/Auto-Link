@@ -2,7 +2,7 @@ import { prisma } from './../../../../packages/database/src/client';
 import express, { Request, Response } from 'express';
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 app.use(express.json());
 
 import {Kafka} from "kafkajs";

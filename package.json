@@ -12,7 +12,13 @@
     "db:migrate:deploy": "turbo run db:migrate:deploy",
     "db:push": "turbo run db:push",
     "db:seed": "turbo run db:seed",
-    "generate": "turbo run generate"
+    "generate": "turbo run generate",
+    "start-frontend": "npm run dev --prefix apps/frontend",
+    "start-hook": "npm run dev --prefix apps/Backend/hook",
+    "start-primary-backend": "npm run dev --prefix apps/Backend/primary-backend",
+    "start-processor": "npm run dev --prefix apps/Backend/Processor",
+    "start-worker": "npm run dev --prefix apps/Backend/worker",
+    "begin": "npm-run-all -p start-frontend start-hook start-primary-backend start-processor start-worker"
   },
   "prisma": {
     "schema": "packages/database/prisma/schema.prisma",
@@ -26,5 +32,8 @@
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "turbo": "^2.0.11"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }

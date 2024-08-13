@@ -5,14 +5,14 @@ const TestWebhook = ({ userId, zapId }) => {
   useEffect(() => {
     const sendRequest = async () => {
     //   const url = `http://localhost:3001/hooks/catch/${userId}/${zapId}`;
-         const url="http://localhost:3002/hooks/catch/1/b15ec296-3c53-423e-9dad-2d23cc4651e0"
+         const url="http://localhost:3002/hooks/catch/1/32107738-b95e-45b0-969c-d396348b7e9c"
       const bodyData = {
         // Random data for testing
         field1: "randomValue1",
         field2: 12345,
         field3: true,
       };
-
+//http://localhost:3001/hooks/catch/1/c8291b83-0a2a-45ac-a535-6cd2c8289dad/e30=
       try {
         const response = await fetch(url, {
           method: "POST",

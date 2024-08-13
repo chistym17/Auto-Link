@@ -1,10 +1,10 @@
 // @ts-nocheck
 
 "use client";
-import { Appbar } from "@/components/Appbar";
-import { CheckFeature } from "@/components/CheckFeature";
-import { Input } from "@/components/Input";
-import { PrimaryButton } from "@/components/buttons/PrimaryButton";
+import { Appbar } from "../../components/Appbar";
+import { CheckFeature } from "../../components/CheckFeature";
+import { Input } from "../../components/Input";
+import { PrimaryButton } from "../../components/buttons/PrimaryButton";
 import axios from "axios";
 import { useState } from "react";
 import { BACKEND_URL } from "../config";
