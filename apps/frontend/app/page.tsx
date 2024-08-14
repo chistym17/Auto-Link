@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import CreateZapButton from "../components/zapbtn"
 import WebhookTester from "../components/testurl"
 import Webhookform from "../components/emailform"
+import { HowItWorks } from "../components/howworks";
 export default function Home() {
   // const user=useSession()
   // console.log(user)
@@ -13,6 +14,7 @@ export default function Home() {
     <main className="pb-48">
         <Appbar />
         <Hero />
+        <HowItWorks></HowItWorks>
         <div className="pt-8">
           <HeroVideo />
         </div>

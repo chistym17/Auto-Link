@@ -6,7 +6,7 @@ export const Hero = () => {
     const router = useRouter();
     return (
         <div className="flex justify-center items-center py-16 ">
-            <div className="bg-white rounded-xl shadow-xl p-8 max-w-6xl h-[500px] flex flex-col justify-between">
+            <div className="bg-white border-custom rounded-xl shadow-xl p-8 max-w-6xl h-[500px] flex flex-col justify-between">
                 <div className="text-center mt-2">
                     <TextGenerateEffect
                         words="Automate Your Workflow with IntegrateIT"
