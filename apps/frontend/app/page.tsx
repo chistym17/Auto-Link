@@ -8,21 +8,23 @@ import WebhookTester from "../components/testurl"
 import Webhookform from "../components/emailform"
 import { HowItWorks } from "../components/howworks";
 import { GetStartedSection } from "../components/getstarted";
+import { Footer } from "../components/Footer";
 export default function Home() {
   // const user=useSession()
   // console.log(user)
   return (
-    <main className="pb-48">
+    <main className="">
         <Appbar />
         <Hero />
         <HowItWorks></HowItWorks>
         <GetStartedSection></GetStartedSection>
-        <div className="pt-8">
+        {/* <div className="pt-8">
           <HeroVideo />
-        </div>
+        </div> */}
         <CreateZapButton></CreateZapButton>
-        <WebhookTester></WebhookTester>
-        <Webhookform></Webhookform>
+        {/* <WebhookTester></WebhookTester> */}
+        {/* <Webhookform></Webhookform> */}
+        <Footer></Footer>
     </main>
   );
 }
