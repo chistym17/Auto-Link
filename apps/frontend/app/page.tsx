@@ -7,6 +7,7 @@ import CreateZapButton from "../components/zapbtn"
 import WebhookTester from "../components/testurl"
 import Webhookform from "../components/emailform"
 import { HowItWorks } from "../components/howworks";
+import { GetStartedSection } from "../components/getstarted";
 export default function Home() {
   // const user=useSession()
   // console.log(user)
@@ -15,6 +16,7 @@ export default function Home() {
         <Appbar />
         <Hero />
         <HowItWorks></HowItWorks>
+        <GetStartedSection></GetStartedSection>
         <div className="pt-8">
           <HeroVideo />
         </div>
