@@ -9,6 +9,7 @@ import Webhookform from "../components/emailform"
 import { HowItWorks } from "../components/howworks";
 import { GetStartedSection } from "../components/getstarted";
 import { Footer } from "../components/Footer";
+import { AvailableZaps } from "../components/availablezaps";
 export default function Home() {
   // const user=useSession()
   // console.log(user)
@@ -21,7 +22,8 @@ export default function Home() {
         {/* <div className="pt-8">
           <HeroVideo />
         </div> */}
-        <CreateZapButton></CreateZapButton>
+        {/* <CreateZapButton></CreateZapButton> */}
+        <AvailableZaps></AvailableZaps>
         {/* <WebhookTester></WebhookTester> */}
         {/* <Webhookform></Webhookform> */}
         <Footer></Footer>
