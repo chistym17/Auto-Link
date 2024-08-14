@@ -10,6 +10,7 @@ import { HowItWorks } from "../components/howworks";
 import { GetStartedSection } from "../components/getstarted";
 import { Footer } from "../components/Footer";
 import { AvailableZaps } from "../components/availablezaps";
+import { ReviewSection } from "../components/reviews";
 export default function Home() {
   // const user=useSession()
   // console.log(user)
@@ -24,6 +25,7 @@ export default function Home() {
         </div> */}
         {/* <CreateZapButton></CreateZapButton> */}
         <AvailableZaps></AvailableZaps>
+        <ReviewSection></ReviewSection>
         {/* <WebhookTester></WebhookTester> */}
         {/* <Webhookform></Webhookform> */}
         <Footer></Footer>
