@@ -3,5 +3,26 @@
 @tailwind utilities;
 
 body {
-  background-color: #fffdf9;
+  background-color: #FFF5F4;
+}
+
+
+.bg-custom {
+  background: linear-gradient(90deg, #F38186 0%, #FD9B59 100%);
+}
+
+/* globals.css */
+
+.text-pink {
+  color: #F38186;
+}
+
+.text-orange {
+  color: #FD9B59;
+}
+/* globals.css */
+
+.border-custom {
+  border: 2px solid #FD9B59; /* Border color #F38186 (pink) */
+  border-radius: 8px; /* Optional: rounded corners */
 }
