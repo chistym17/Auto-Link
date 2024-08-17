@@ -3,6 +3,7 @@ import { prisma } from './../../../../packages/database/src/client';
 import { Kafka } from 'kafkajs';
 import express, { Request, Response } from 'express';
 import { sendEmail } from './sendemail';
+import { addUser, testConnection } from './updatedb';
 require('dotenv').config();
 const axios = require('axios');
 
@@ -85,19 +86,26 @@ app.listen(port, () => {
 // main()
 
 
+const newUser = {
+  name: 'testuser',
+  email: 'testuser@example.com',
+  password: 'Test@1234'
+};
 
 
 
-// (async () => {
-//   const result = await sendEmail({ toEmail: 'chistym17@gmail.com' });
+
+
+(async () => {
+  const result = await addUser(newUser);
   
 
-//   if (result.error) {
-//     console.log("Failed to send email:", result.error);
-//   } else {
-//     console.log("Email sent successfully:", result.data);
-//   }
-// })();
+  if (result.error) {
+    console.log("Failed to send email:", result.error);
+  } else {
+    console.log("Email sent successfully:", result.data);
+  }
+})();
 
 
 

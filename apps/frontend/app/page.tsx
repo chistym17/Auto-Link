@@ -26,7 +26,7 @@ export default function Home() {
         {/* <CreateZapButton></CreateZapButton> */}
         <AvailableZaps></AvailableZaps>
         <ReviewSection></ReviewSection>
-        {/* <WebhookTester></WebhookTester> */}
+        <WebhookTester></WebhookTester>
         {/* <Webhookform></Webhookform> */}
         <Footer></Footer>
     </main>
