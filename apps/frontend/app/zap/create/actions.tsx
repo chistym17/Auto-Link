@@ -65,3 +65,90 @@ export function SolanaSelector({ setMetadata }: { setMetadata: (params: any) => 
         </div>
     );
 }
+
+
+
+
+export  function DBSelector({ onSubmit }) {
+    const [dbUrl, setDbUrl] = useState("");
+    const [dbName, setDbName] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = () => {
+        if (!dbUrl || !dbName || !username || !password) {
+            alert("Please fill in all the fields.");
+            return;
+        }
+
+        onSubmit({ dbUrl, dbName, username, password });
+    };
+
+    return (
+        <div className="w-full max-w-md mx-auto mt-8 p-4 border rounded shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">Database Connection</h2>
+
+            <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="dbUrl">
+                    Database URL
+                </label>
+                <input
+                    type="text"
+                    id="dbUrl"
+                    value={dbUrl}
+                    onChange={(e) => setDbUrl(e.target.value)}
+                    className="w-full p-2 border rounded"
+                    placeholder="Enter your database URL"
+                />
+            </div>
+
+            <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="dbName">
+                    Database Name
+                </label>
+                <input
+                    type="text"
+                    id="dbName"
+                    value={dbName}
+                    onChange={(e) => setDbName(e.target.value)}
+                    className="w-full p-2 border rounded"
+                    placeholder="Enter your database name"
+                />
+            </div>
+
+            <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
+                    Username
+                </label>
+                <input
+                    type="text"
+                    id="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="w-full p-2 border rounded"
+                    placeholder="Enter your username"
+                />
+            </div>
+
+            <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
+                    Password
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full p-2 border rounded"
+                    placeholder="Enter your password"
+                />
+            </div>
+
+            <div className="flex justify-end">
+                <PrimaryButton onClick={handleSubmit}>
+                    Connect
+                </PrimaryButton>
+            </div>
+        </div>
+    );
+}

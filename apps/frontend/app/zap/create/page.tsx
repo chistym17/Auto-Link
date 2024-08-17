@@ -7,7 +7,7 @@ import { PrimaryButton } from "../../../components/buttons/PrimaryButton";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Modal, PaymentSelector } from "../functions";
+import { Modal} from "../functions";
 import SideNav from "./sidenav";
 import { AiOutlineForm, AiOutlineMail, AiOutlineUser, AiOutlineGithub, AiOutlineDollarCircle } from 'react-icons/ai';
 import { availableActions, availableTriggers } from "./actions";
@@ -117,6 +117,8 @@ export default function Page() {
                     index={selectedModalIndex}
                 />
             )}
+
+            <button className="px-6 py-3 mt-5 mb-5 text-black " onClick={handleCreateZap}>Publish zap</button>
         </div>
         
     );

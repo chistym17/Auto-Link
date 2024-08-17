@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { BsArrowRight } from "react-icons/bs";
-import { EmailSelector, SolanaSelector, availableActions, availableTriggers } from "./create/actions";
+import { EmailSelector, SolanaSelector, DBSelector, availableActions, availableTriggers } from "./create/actions"; // Ensure DBSelector is imported
 import { AiOutlineCreditCard } from "react-icons/ai";
 import { Input } from "../../components/Input";
 import { PrimaryButton } from "../../components/buttons/PrimaryButton";
@@ -35,6 +35,14 @@ export function Modal({ index, onSelect, availableItems }: { index: number, onSe
                         )}
                         {step === 1 && selectedAction?.id === "action_2" && (
                             <SolanaSelector setMetadata={(metadata) => {
+                                onSelect({
+                                    ...selectedAction,
+                                    metadata
+                                });
+                            }} />
+                        )}
+                        {step === 1 && selectedAction?.id === "action_6" && (
+                            <DBSelector onSubmit={(metadata) => {
                                 onSelect({
                                     ...selectedAction,
                                     metadata
@@ -78,63 +86,6 @@ export function Modal({ index, onSelect, availableItems }: { index: number, onSe
                         </div>
                     )}
                 </div>
-            </div>
-        </div>
-    );
-}
-
-
-
-
-
-
-
-export function PaymentSelector({ setMetadata }: { setMetadata: (params: any) => void; }) {
-    const [amount, setAmount] = useState("");
-    const [cardNumber, setCardNumber] = useState("");
-    const [expiryDate, setExpiryDate] = useState("");
-    const [cvv, setCvv] = useState("");
-
-    return (
-        <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-                <AiOutlineCreditCard className="text-[#512D6D] w-6 h-6" />
-                <Input
-                    label={"Card Number"} 
-                    type={"text"} 
-                    placeholder="Enter Card Number" 
-                    onChange={(e) => setCardNumber(e.target.value)} 
-                />
-            </div>
-            <div className="flex space-x-4">
-                <Input 
-                    label={"Expiry Date"} 
-                    type={"text"} 
-                    placeholder="MM/YY" 
-                    onChange={(e) => setExpiryDate(e.target.value)} 
-                />
-                <Input 
-                    label={"CVV"} 
-                    type={"text"} 
-                    placeholder="CVV" 
-                    onChange={(e) => setCvv(e.target.value)} 
-                />
-            </div>
-            <Input 
-                label={"Amount"} 
-                type={"text"} 
-                placeholder="Amount" 
-                onChange={(e) => setAmount(e.target.value)} 
-            />
-            <div className="pt-4">
-                <PrimaryButton onClick={() => {
-                    setMetadata({
-                        amount,
-                        cardNumber,
-                        expiryDate,
-                        cvv
-                    });
-                }}>Submit</PrimaryButton>
             </div>
         </div>
     );
