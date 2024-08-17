@@ -88,16 +88,16 @@ app.listen(port, () => {
 
 
 
-(async () => {
-  const result = await sendEmail({ toEmail: 'chistym17@gmail.com' });
+// (async () => {
+//   const result = await sendEmail({ toEmail: 'chistym17@gmail.com' });
   
 
-  if (result.error) {
-    console.log("Failed to send email:", result.error);
-  } else {
-    console.log("Email sent successfully:", result.data);
-  }
-})();
+//   if (result.error) {
+//     console.log("Failed to send email:", result.error);
+//   } else {
+//     console.log("Email sent successfully:", result.data);
+//   }
+// })();
 
 
 
