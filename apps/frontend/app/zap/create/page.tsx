@@ -1,6 +1,5 @@
 "use client";
 
-import { Modak } from "next/font/google";
 import { Appbar } from "../../../components/Appbar";
 import { Input } from "../../../components/Input";
 import { ZapCell } from "../../../components/ZapCell";
@@ -8,24 +7,17 @@ import { PrimaryButton } from "../../../components/buttons/PrimaryButton";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Modal } from "../functions";
+import { Modal, PaymentSelector } from "../functions";
 import SideNav from "./sidenav";
+import { AiOutlineForm, AiOutlineMail, AiOutlineUser, AiOutlineGithub, AiOutlineDollarCircle } from 'react-icons/ai';
+import { availableActions, availableTriggers } from "./actions";
 
-// Manually defined available triggers and actions
-const availableTriggers = [
-    { id: "trigger_1", name: "New Form Submission", image: "/images/form.png" },
-    { id: "trigger_2", name: "New Email Received", image: "/images/email.png" }
-];
+// Manually defined available triggers and their associated actions
 
-const availableActions = [
-    { id: "action_1", name: "Send Email", image: "/images/send_email.png" },
-    { id: "action_2", name: "Send Solana", image: "/images/solana.png" }
-];
-
-const user={
-    name:"chisty",
-    email:"chisty@gmail.com",
-    avatar:'../../albert-dera-ILip77SbmOE-unsplash.jpg'
+const user = {
+    name: "chisty",
+    email: "chisty@gmail.com",
+    avatar: '../../albert-dera-ILip77SbmOE-unsplash.jpg'
 }
 
 export default function Page() {
@@ -51,12 +43,9 @@ export default function Page() {
             }
         }
     };
-    
-
-
 
     const router = useRouter();
-    const [selectedTrigger, setSelectedTrigger] = useState<{ id: string; name: string; }>();
+    const [selectedTrigger, setSelectedTrigger] = useState<{ id: string; name: string; actions: string[] }>();
     const [selectedActions, setSelectedActions] = useState<{
         index: number;
         availableActionId: string;
@@ -67,7 +56,6 @@ export default function Page() {
 
     return (
         <div>
-           
             <div className="w-full min-h-screen ">
                 <div className="flex justify-center w-full">
                     <ZapCell onClick={() => {
@@ -100,7 +88,7 @@ export default function Page() {
             </div>
             {selectedModalIndex && (
                 <Modal
-                    availableItems={selectedModalIndex === 1 ? availableTriggers : availableActions}
+                    availableItems={selectedModalIndex === 1 ? availableTriggers : availableActions.filter(action => selectedTrigger?.actions.includes(action.id))}
                     onSelect={(props: null | { name: string; id: string; metadata: any; }) => {
                         if (props === null) {
                             setSelectedModalIndex(null);
@@ -109,7 +97,8 @@ export default function Page() {
                         if (selectedModalIndex === 1) {
                             setSelectedTrigger({
                                 id: props.id,
-                                name: props.name
+                                name: props.name,
+                                actions: availableTriggers.find(trigger => trigger.id === props.id)?.actions || []
                             });
                         } else {
                             setSelectedActions(a => {
@@ -128,14 +117,8 @@ export default function Page() {
                     index={selectedModalIndex}
                 />
             )}
-
-
-
         </div>
+        
     );
+    
 }
-
-
-
-
-

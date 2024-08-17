@@ -1,6 +1,11 @@
+//@ts-nocheck
 import { prisma } from './../../../../packages/database/src/client';
 import { Kafka } from 'kafkajs';
 import express, { Request, Response } from 'express';
+import { sendEmail } from './sendemail';
+require('dotenv').config();
+const axios = require('axios');
+
 
 const app = express();
 const port = 3004;
@@ -77,4 +82,22 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-main()
+// main()
+
+
+
+
+
+(async () => {
+  const result = await sendEmail({ toEmail: 'chistym17@gmail.com' });
+  
+
+  if (result.error) {
+    console.log("Failed to send email:", result.error);
+  } else {
+    console.log("Email sent successfully:", result.data);
+  }
+})();
+
+
+

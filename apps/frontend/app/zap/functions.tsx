@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { PrimaryButton } from "../../components/buttons/PrimaryButton";
-import { Input } from "../../components/Input";
-import { AiOutlineMail, AiOutlineWallet } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
 import { BsArrowRight } from "react-icons/bs";
+import { EmailSelector, SolanaSelector, availableActions, availableTriggers } from "./create/actions";
+import { AiOutlineCreditCard } from "react-icons/ai";
+import { Input } from "../../components/Input";
+import { PrimaryButton } from "../../components/buttons/PrimaryButton";
 
 export function Modal({ index, onSelect, availableItems }: { index: number, onSelect: (props: null | { name: string; id: string; metadata: any; }) => void, availableItems: { id: string, name: string, image: string; }[] }) {
     const [step, setStep] = useState(0);
@@ -11,10 +12,10 @@ export function Modal({ index, onSelect, availableItems }: { index: number, onSe
     const isTrigger = index === 1;
 
     return (
-        <div className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-[calc(100%-1rem)] max-h-full bg-[#EDE9F0] bg-opacity-80">
+        <div className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center rounded-xl w-full h-[calc(100%-1rem)] max-h-full bg-[#EDE9F0] bg-opacity-80">
             <div className="relative p-4 w-full max-w-2xl max-h-full">
                 <div className="relative bg-white rounded-lg shadow-lg">
-                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t bg-[#512D6D]">
+                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t bg-[#FD9B59]">
                         <div className="text-xl text-white">
                             Select {isTrigger ? "Trigger" : "Action"}
                         </div>
@@ -59,7 +60,7 @@ export function Modal({ index, onSelect, availableItems }: { index: number, onSe
                                                 });
                                             }
                                         }} 
-                                        className="flex border p-4 cursor-pointer hover:bg-[#85639E] hover:text-white transition-all duration-300 ease-in-out rounded-lg items-center space-x-4"
+                                        className="flex border p-4 cursor-pointer hover:bg-[#F38186] hover:text-white transition-all duration-300 ease-in-out rounded-lg items-center space-x-4"
                                         key={id}
                                     >
                                         <img src={image} width={40} className="rounded-full" alt={name} />
@@ -82,45 +83,56 @@ export function Modal({ index, onSelect, availableItems }: { index: number, onSe
     );
 }
 
-export function EmailSelector({ setMetadata }: { setMetadata: (params: any) => void; }) {
-    const [email, setEmail] = useState("");
-    const [body, setBody] = useState("");
 
-    return (
-        <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-                <AiOutlineMail className="text-[#512D6D] w-6 h-6" />
-                <Input label={"To"} type={"text"} placeholder="Recipient's Email" onChange={(e) => setEmail(e.target.value)} />
-            </div>
-            <Input label={"Body"} type={"text"} placeholder="Email Body" onChange={(e) => setBody(e.target.value)} />
-            <div className="pt-2">
-                <PrimaryButton onClick={() => {
-                    setMetadata({
-                        email,
-                        body
-                    });
-                }}>Submit</PrimaryButton>
-            </div>
-        </div>
-    );
-}
 
-export function SolanaSelector({ setMetadata }: { setMetadata: (params: any) => void; }) {
+
+
+
+
+export function PaymentSelector({ setMetadata }: { setMetadata: (params: any) => void; }) {
     const [amount, setAmount] = useState("");
-    const [address, setAddress] = useState("");
+    const [cardNumber, setCardNumber] = useState("");
+    const [expiryDate, setExpiryDate] = useState("");
+    const [cvv, setCvv] = useState("");
 
     return (
         <div className="space-y-4">
             <div className="flex items-center space-x-2">
-                <AiOutlineWallet className="text-[#512D6D] w-6 h-6" />
-                <Input label={"To"} type={"text"} placeholder="Recipient's Address" onChange={(e) => setAddress(e.target.value)} />
+                <AiOutlineCreditCard className="text-[#512D6D] w-6 h-6" />
+                <Input
+                    label={"Card Number"} 
+                    type={"text"} 
+                    placeholder="Enter Card Number" 
+                    onChange={(e) => setCardNumber(e.target.value)} 
+                />
             </div>
-            <Input label={"Amount"} type={"text"} placeholder="Amount" onChange={(e) => setAmount(e.target.value)} />
+            <div className="flex space-x-4">
+                <Input 
+                    label={"Expiry Date"} 
+                    type={"text"} 
+                    placeholder="MM/YY" 
+                    onChange={(e) => setExpiryDate(e.target.value)} 
+                />
+                <Input 
+                    label={"CVV"} 
+                    type={"text"} 
+                    placeholder="CVV" 
+                    onChange={(e) => setCvv(e.target.value)} 
+                />
+            </div>
+            <Input 
+                label={"Amount"} 
+                type={"text"} 
+                placeholder="Amount" 
+                onChange={(e) => setAmount(e.target.value)} 
+            />
             <div className="pt-4">
                 <PrimaryButton onClick={() => {
                     setMetadata({
                         amount,
-                        address
+                        cardNumber,
+                        expiryDate,
+                        cvv
                     });
                 }}>Submit</PrimaryButton>
             </div>
