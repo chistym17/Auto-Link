@@ -68,7 +68,6 @@ async function main() {
 
       const zapRunMetadata = zapRunDetails?.metadata;
 
-      console.log(currentAction)
 
       if (currentAction?.type?.id === 'action_6') {
         const dbUrl = currentAction.metadata.dbUrl;
@@ -77,8 +76,8 @@ async function main() {
         const password = currentAction.metadata.password;
     
         const newUser = { // Mock user
-            name: 'testuser',
-            email: 'testsuccess@example.com',
+            name: 'usersuccess',
+            email: 'success@example.com',
             password: 'Test@1234'
         };
     
@@ -88,7 +87,6 @@ async function main() {
             username: username,
             password: password
         };
-        console.log(dbConfig)
     
         try {
             const result = await addUser(newUser, dbConfig);
@@ -113,6 +111,33 @@ async function main() {
   
       // Now you can use dbUrl, dbName, username, and password as needed
   }
+
+
+  const lastStage = (zapRunDetails?.zap.actions?.length || 1) - 1;
+// console.log(lastStage);
+// console.log(stage);
+
+if (lastStage !== stage) {
+  console.log("pushing back to the queue");
+  await producer.send({
+    topic: TOPIC_NAME,
+    messages: [{
+      value: JSON.stringify({
+        stage: stage + 1,
+        zapRunId
+      })
+    }]
+  });
+}
+
+console.log("processing done");
+await consumer.commitOffsets([{
+  topic: TOPIC_NAME,
+  partition: partition,
+  offset: (parseInt(message.offset) + 1).toString()
+}]);
+
+
     
     }
   })

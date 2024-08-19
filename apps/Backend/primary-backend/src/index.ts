@@ -94,6 +94,7 @@ app.post("/createzap", async (req, res) => {
       const { availableTriggerId, triggerMetadata, actions } = body;
 
       // Create zap and actions within a transaction
+      console.log(triggerMetadata,actions)
       const zapId = await prisma.$transaction(async (tx) => {
           // Create Zap
           const zap = await tx.zap.create({

@@ -6,6 +6,10 @@ const WebhookTester = () => {
   const [loading, setLoading] = useState(false);
 
   const handleTestWebhook = async () => {
+
+
+
+    
     if (!webhookUrl) {
       alert("Please enter a webhook URL");
       return;

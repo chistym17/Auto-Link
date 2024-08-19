@@ -69,7 +69,7 @@ export function SolanaSelector({ setMetadata }: { setMetadata: (params: any) => 
 
 
 
-export  function DBSelector({ onSubmit }) {
+export  function DBSelector( { setMetadata }: { setMetadata: (params: any) => void; } ) {
     const [dbUrl, setDbUrl] = useState("");
     const [dbName, setDbName] = useState("");
     const [username, setUsername] = useState("");
@@ -80,8 +80,8 @@ export  function DBSelector({ onSubmit }) {
             alert("Please fill in all the fields.");
             return;
         }
-
-        onSubmit({ dbUrl, dbName, username, password });
+         console.log(dbUrl,dbName,password,username)
+        setMetadata({ dbUrl, dbName, username, password });
     };
 
     return (

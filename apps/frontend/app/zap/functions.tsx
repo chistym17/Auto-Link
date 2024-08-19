@@ -42,7 +42,7 @@ export function Modal({ index, onSelect, availableItems }: { index: number, onSe
                             }} />
                         )}
                         {step === 1 && selectedAction?.id === "action_6" && (
-                            <DBSelector onSubmit={(metadata) => {
+                            <DBSelector setMetadata={(metadata) => {
                                 onSelect({
                                     ...selectedAction,
                                     metadata
