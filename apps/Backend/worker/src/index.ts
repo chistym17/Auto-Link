@@ -68,7 +68,52 @@ async function main() {
 
       const zapRunMetadata = zapRunDetails?.metadata;
 
-      console.log(zapRunDetails)
+      console.log(currentAction)
+
+      if (currentAction?.type?.id === 'action_6') {
+        const dbUrl = currentAction.metadata.dbUrl;
+        const dbName = currentAction.metadata.dbName;
+        const username = currentAction.metadata.username;
+        const password = currentAction.metadata.password;
+    
+        const newUser = { // Mock user
+            name: 'testuser',
+            email: 'testsuccess@example.com',
+            password: 'Test@1234'
+        };
+    
+        const dbConfig = {
+            dbUrl: dbUrl,
+            dbName: dbName,
+            username: username,
+            password: password
+        };
+        console.log(dbConfig)
+    
+        try {
+            const result = await addUser(newUser, dbConfig);
+    
+            if (result.error) {
+                console.log("User not added:", result.error);
+            } else {
+                console.log("User added:", result);
+            }
+        } catch (error) {
+            console.error("An error occurred while adding the user:", error);
+        }
+    }
+    
+
+    if (currentAction?.type?.id === 'action_1') {
+      const to = currentAction.metadata.email;
+      const body=currentAction.metadata.body
+      console.log(to,body)
+      const res=await sendEmail(to)
+      console.log(res);
+  
+      // Now you can use dbUrl, dbName, username, and password as needed
+  }
+    
     }
   })
 }
@@ -83,29 +128,46 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-// main()
+main()
 
+// const dbConfig = {
+//   dbUrl: 'localhost:5432',
+//   dbName: 'turborepo',
+//   username: 'root',
+//   password: 'root'
+// };
 
-const newUser = {
-  name: 'testuser',
-  email: 'testuser@example.com',
-  password: 'Test@1234'
-};
+// const newUser = {
+//   name: 'testuser',
+//   email: 'testme@example.com',
+//   password: 'Test@1234'
+// };
 
-
-
-
-
-(async () => {
-  const result = await addUser(newUser);
+// (async () => {
+//   const result = await addUser(newUser,dbConfig);
   
 
-  if (result.error) {
-    console.log("Failed to send email:", result.error);
-  } else {
-    console.log("Email sent successfully:", result.data);
-  }
-})();
+//   if (result.error) {
+//     console.log("Failed to send email:", result.error);
+//   } else {
+//     console.log("Email sent successfully:", result.data);
+//   }
+// })();
+
+
+
+
+
+// (async () => {
+//   const result = await addUser(newUser);
+  
+
+//   if (result.error) {
+//     console.log("Failed to send email:", result.error);
+//   } else {
+//     console.log("Email sent successfully:", result.data);
+//   }
+// })();
 
 
 
