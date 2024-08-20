@@ -10,6 +10,7 @@ import { useState } from "react";
 import { BACKEND_URL } from "../config";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import create from "../../lib/actions/setcookies";
 
 export default function() {
     const router = useRouter();
@@ -52,10 +53,13 @@ export default function() {
                                 password,
                                 name
                             });
-                            console.log(res)
+                            const token=res?.data?.token
+                            console.log(token)
                             if(res.status==201)
                                 {
                                     toast.success("Signup successful")
+                                    await create(token)
+
                                 }
                             else
 
