@@ -9,6 +9,7 @@ import axios from "axios";
 import { useState } from "react";
 import { BACKEND_URL } from "../config";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function() {
     const router = useRouter();
@@ -46,13 +47,22 @@ export default function() {
 
                     <div className="pt-4">
                         <PrimaryButton onClick={async () => {
-                            const res = await axios.post(`http://localhost:3001/api/v1/user/signup`, {
+                            const res = await axios.post(`http://localhost:3001/signup`, {
                                 email: email,
                                 password,
                                 name
                             });
                             console.log(res)
-                            router.push("/login");
+                            if(res.status==201)
+                                {
+                                    toast.success("Signup successful")
+                                }
+                            else
+
+                            {
+                               toast.error("error occured")
+                            }
+                            router.push('/');
                         }} size="big">Get started free</PrimaryButton>
                     </div>
                 </div>

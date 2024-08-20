@@ -51,7 +51,7 @@ app.use(cors({
 }));
 
 
-app.post('/api/v1/user/signup', async (req: Request, res: Response) => {
+app.post('/signup', async (req: Request, res: Response) => {
   const { email, password, name } = req.body;
 
   if (!email || !password || !name) {
@@ -59,16 +59,13 @@ app.post('/api/v1/user/signup', async (req: Request, res: Response) => {
   }
 
   try {
-    // Check if the user already exists
     const existingUser = await prisma.user.findUnique({ where: { email: email } });
     if (existingUser) {
       return res.status(409).json({ message: 'User already exists' });
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the user
     const user = await prisma.user.create({
       data: {
         name,
