@@ -11,9 +11,12 @@ import { GetStartedSection } from "../components/getstarted";
 import { Footer } from "../components/Footer";
 import { AvailableZaps } from "../components/availablezaps";
 import { ReviewSection } from "../components/reviews";
+import getUserInfo from "../lib/actions/getuserinfo";
 export default function Home() {
   // const user=useSession()
   // console.log(user)
+  const res=getUserInfo();
+  console.log(res);
   return (
     <main className="">
         <Appbar />
