@@ -13,19 +13,19 @@ export default function SideNav({ user }: { user: { name: string; email: string;
 
                 {/* Navigation Links */}
                 <nav className="space-y-4">
-                    <a href="#" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
+                    <a href="/" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
                         <AiOutlineHome className="w-6 h-6" />
                         <span>Home</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
+                    <a href="/zap/create" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
                         <AiOutlinePlusCircle className="w-6 h-6" />
                         <span>Create Zaps</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
+                    <a href="/dashboard" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
                         <BsLightning className="w-6 h-6" />
                         <span>My Zaps</span>
                     </a>
-                    <a href="#" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
+                    <a href="/dashboard" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
                         <AiOutlineSetting className="w-6 h-6" />
                         <span>Dashboard</span>
                     </a>

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import getUserInfo from '../../lib/actions/getuserinfo';
+import withPrivateRoute from '../../components/privateroute';
 
 const Page = async () => {
     try {
@@ -71,4 +72,4 @@ const Page = async () => {
     }
 };
 
-export default Page;
+export default withPrivateRoute(Page);
