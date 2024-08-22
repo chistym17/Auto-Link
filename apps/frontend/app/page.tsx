@@ -13,10 +13,8 @@ import { AvailableZaps } from "../components/availablezaps";
 import { ReviewSection } from "../components/reviews";
 import getUserInfo from "../lib/actions/getuserinfo";
 export default function Home() {
-  // const user=useSession()
-  // console.log(user)
-  const res=getUserInfo();
-  console.log(res);
+
+  
   return (
     <main className="">
         <Appbar />
@@ -29,7 +27,7 @@ export default function Home() {
         {/* <CreateZapButton></CreateZapButton> */}
         <AvailableZaps></AvailableZaps>
         <ReviewSection></ReviewSection>
-        <WebhookTester></WebhookTester>
+        {/* <WebhookTester></WebhookTester> */}
         {/* <Webhookform></Webhookform> */}
         <Footer></Footer>
     </main>

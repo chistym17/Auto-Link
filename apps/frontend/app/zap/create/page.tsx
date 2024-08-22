@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Appbar } from "../../../components/Appbar";
@@ -8,17 +9,19 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Modal } from "../functions";
-import SideNav from "./sidenav";
-import { AiOutlineForm, AiOutlineMail, AiOutlineUser, AiOutlineGithub, AiOutlineDollarCircle } from 'react-icons/ai';
 import { availableActions, availableTriggers } from "./actions";
+import getUserInfo from "../../../lib/actions/getuserinfo";
 
-const user = {
-    name: "chisty",
-    email: "chisty@gmail.com",
-    avatar: '../../albert-dera-ILip77SbmOE-unsplash.jpg'
-}
+// const user = {
+//     name: "chisty",
+//     email: "chisty@gmail.com",
+//     avatar: '../../albert-dera-ILip77SbmOE-unsplash.jpg'
+// }
 
-export default function Page() {
+const Page =  () => {
+
+
+    //  const user=await getUserInfo()
 
     const [selectedTrigger, setSelectedTrigger] = useState<{ id: string; name: string; actions: string[] }>();
     const [selectedActions, setSelectedActions] = useState<{
@@ -178,3 +181,4 @@ export default function Page() {
         </div>
     );
 }
+export default Page;

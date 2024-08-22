@@ -2,7 +2,7 @@ import { prisma } from './../../../../packages/database/src/client';
 import express, { Request, Response } from 'express';
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = 3003;
 app.use(express.json());
 
 import {Kafka} from "kafkajs";
@@ -59,5 +59,5 @@ app.get('/', (req: Request, res: Response) => {
 
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`processor is running on port ${PORT}`);
 });

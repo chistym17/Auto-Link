@@ -1,23 +1,21 @@
 import { FaWpforms, FaEnvelope, FaUserAlt, FaGithub, FaDollarSign } from 'react-icons/fa';
+import { FaUser } from "react-icons/fa";
+
 import { useState } from "react";
 import { AiOutlineMail, AiOutlineWallet } from "react-icons/ai";
 import { PrimaryButton } from '../../../components/buttons/PrimaryButton';
 import { Input } from '../../../components/Input';
 export const availableTriggers = [
-    // { id: "trigger_2", name: "New Email Received", icon: <FaEnvelope />, actions: ["action_1", "action_3"] },
-    // { id: "trigger_3", name: "Payment Completion", icon: <FaDollarSign />, actions: ["action_4", "action_5"] },
-    { id: "trigger_4", name: "New User Sign In", icon: <FaUserAlt />, actions: ["action_1", "action_6"] },
-    // { id: "trigger_5", name: "GitHub New Issue", icon: <FaGithub />, actions: ["action_3", "action_4"] },
+    { id: "trigger_4", name: "New User Sign In",image:"img1.jpg", actions: ["action_1", "action_6"] },
 ];
 
 export const availableActions = [
-    { id: "action_1", name: "Send Welcome Email", icon: <FaEnvelope /> },
-    { id: "action_2", name: "Send Solana", icon: <FaDollarSign /> },
-    { id: "action_3", name: "Send Owner an Email", icon: <FaEnvelope /> },
-    { id: "action_4", name: "Update DB", icon: <FaWpforms /> },
-    { id: "action_5", name: "Send Email to Service Team", icon: <FaEnvelope /> },
-    { id: "action_6", name: "Update Database", icon: <FaUserAlt /> },
-    // Add more actions as needed
+    { id: "action_1", name: "Send Welcome Email", image: "welcome-email.jpg" },
+    { id: "action_2", name: "Send Solana", image: "send-solana.jpg" },
+    { id: "action_3", name: "Send Owner an Email", image: "owner-email.jpg" },
+    { id: "action_4", name: "Update DB", image: "update-db.jpg" },
+    { id: "action_5", name: "Send Email to Service Team", image: "service-team-email.jpg" },
+    { id: "action_6", name: "Update Database", image: "update-database.jpg" },
 ];
 
 export function EmailSelector({ setMetadata }: { setMetadata: (params: any) => void; }) {

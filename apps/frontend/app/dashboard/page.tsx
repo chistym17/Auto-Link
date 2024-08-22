@@ -72,4 +72,4 @@ const Page = async () => {
     }
 };
 
-export default withPrivateRoute(Page);
+export default Page;

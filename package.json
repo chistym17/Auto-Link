@@ -18,7 +18,13 @@
     "start-primary-backend": "npm run dev --prefix apps/Backend/primary-backend",
     "start-processor": "npm run dev --prefix apps/Backend/Processor",
     "start-worker": "npm run dev --prefix apps/Backend/worker",
-    "begin": "npm-run-all -p start-frontend start-hook start-primary-backend start-processor start-worker"
+    "build-frontend": "npm run build --prefix apps/frontend",
+    "build-hook": "npm run build --prefix apps/Backend/hook",
+    "build-primary-backend": "npm run build --prefix apps/Backend/primary-backend",
+    "build-processor": "npm run build --prefix apps/Backend/Processor",
+    "build-worker": "npm run build --prefix apps/Backend/worker",
+    "build-all": "npm-run-all -p  build-hook build-primary-backend build-processor build-worker",
+    "begin": "npm-run-all -p start-frontend start-hook start-primary-backend "
   },
   "prisma": {
     "schema": "packages/database/prisma/schema.prisma",
