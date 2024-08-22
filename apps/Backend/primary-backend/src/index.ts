@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { prisma } from './../../../../packages/database/src/client';
 import express, { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
@@ -16,6 +15,10 @@ app.use(cors({
 
 app.post('/signup', async (req: Request, res: Response) => {
     const { email, password, name } = req.body;
+    const jwtSecret: string | undefined = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+        throw new Error("JWT_SECRET environment variable is not set");
+    }
 
     if (!email || !password || !name) {
         return res.status(400).json({ message: 'Missing required fields' });
@@ -41,7 +44,7 @@ app.post('/signup', async (req: Request, res: Response) => {
 
         const token = jwt.sign(
             { userId: user.id, email: user.email },
-            process.env.JWT_SECRET,
+            jwtSecret,
             { expiresIn: '1h' }
         );
 
@@ -105,8 +108,10 @@ app.post("/createzap", async (req, res) => {
 });
 
 app.get("/getzaps", async (req, res) => {
-    const id = req.query.userId;
-
+    const id = req.query.userId?.toString();
+    if (!id) {
+        throw new Error("JWT_SECRET environment variable is not set");
+    }
     const zaps = await prisma.zap.findMany({
         where: {
             userId: parseInt(id)
@@ -130,34 +135,7 @@ app.get("/getzaps", async (req, res) => {
     });
 });
 
-app.get("/:zapId", async (req, res) => {
-    const id = req.query.userId;
-    const zapId = req.params.zapId;
 
-    const zap = await prisma.zap.findFirst({
-        where: {
-            id: zapId,
-            userId: parseInt(id)
-        },
-        include: {
-            actions: {
-                include: {
-                    type: true
-                }
-            },
-            trigger: {
-                include: {
-                    type: true
-                }
-            }
-        }
-    });
-
-
-    return res.json({
-        zap
-    });
-});
 
 app.listen(port, () => {
     console.log(`pbackend running at http://localhost:${port}`);
