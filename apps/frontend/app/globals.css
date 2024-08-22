@@ -11,7 +11,6 @@ body {
   background: linear-gradient(90deg, #F38186 0%, #FD9B59 100%);
 }
 
-/* globals.css */
 
 .text-pink {
   color: #F38186;
@@ -20,9 +19,8 @@ body {
 .text-orange {
   color: #FD9B59;
 }
-/* globals.css */
 
 .border-custom {
-  border: 2px solid #FD9B59; /* Border color #F38186 (pink) */
-  border-radius: 8px; /* Optional: rounded corners */
+  border: 2px solid #FD9B59; 
+  border-radius: 8px; 
 }

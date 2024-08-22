@@ -1,6 +1,3 @@
-import { FaWpforms, FaEnvelope, FaUserAlt, FaGithub, FaDollarSign } from 'react-icons/fa';
-import { FaUser } from "react-icons/fa";
-
 import { useState } from "react";
 import { AiOutlineMail, AiOutlineWallet } from "react-icons/ai";
 import { PrimaryButton } from '../../../components/buttons/PrimaryButton';

@@ -9,7 +9,6 @@ export const AvailableZaps = () => {
           Choose from our ready-to-use Zaps to automate common tasks and streamline your workflow.
         </p>
         <div className="mt-8 flex gap-6 mb-6 ">
-          {/* Zap Item 1 */}
           <div className="bg-[#FD9B59] text-white p-6 rounded-lg shadow-lg flex items-center space-x-4 w-full md:w-1/2 lg:w-1/4">
             <FaUserPlus size={24} className="text-white" />
             <div>
@@ -17,7 +16,6 @@ export const AvailableZaps = () => {
               <p className="text-sm mt-1">Automatically welcome new users and add them to your CRM.</p>
             </div>
           </div>
-          {/* Zap Item 2 */}
           <div className="bg-[#F38186] text-white p-6 rounded-lg shadow-lg flex items-center space-x-4 w-full md:w-1/2 lg:w-1/4">
             <FaFileAlt size={24} className="text-white" />
             <div>
@@ -25,7 +23,6 @@ export const AvailableZaps = () => {
               <p className="text-sm mt-1">Capture form submissions and trigger automated responses or workflows.</p>
             </div>
           </div>
-          {/* Zap Item 3 */}
           <div className="bg-[#FD9B59] text-white p-6 rounded-lg shadow-lg flex items-center space-x-4 w-full md:w-1/2 lg:w-1/4">
             <FaCreditCard size={24} className="text-white" />
             <div>
@@ -33,7 +30,6 @@ export const AvailableZaps = () => {
               <p className="text-sm mt-1">Manage and track payment information with ease.</p>
             </div>
           </div>
-          {/* Zap Item 4 */}
           <div className="bg-[#F38186] text-white p-6 rounded-lg shadow-lg flex items-center space-x-4 w-full md:w-1/2 lg:w-1/4">
             <FaDollarSign size={24} className="text-white" />
             <div>

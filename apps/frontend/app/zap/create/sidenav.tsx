@@ -5,13 +5,11 @@ export default function SideNav({ user }: { user: { name: string; email: string;
     return (
         <div className="w-64 h-full bg-[#F38186] text-white flex flex-col justify-between p-4">
             <div>
-                {/* Top Message */}
                 <div className="flex items-center space-x-2 mb-6">
                     <BsLightning className="text-yellow-400 w-6 h-6" />
                     <span className="text-lg font-semibold">Create Your Zap!</span>
                 </div>
 
-                {/* Navigation Links */}
                 <nav className="space-y-4">
                     <a href="/" className="flex items-center space-x-3 hover:bg-[#FD9B59] p-3 rounded-lg transition-all duration-300 ease-in-out">
                         <AiOutlineHome className="w-6 h-6" />
@@ -32,7 +30,6 @@ export default function SideNav({ user }: { user: { name: string; email: string;
                 </nav>
             </div>
 
-            {/* User Info */}
             <div className="mt-6 flex items-center space-x-3 p-3 bg-[#FD9B59] rounded-lg">
                 <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full" />
                 <div>

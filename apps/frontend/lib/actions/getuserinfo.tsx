@@ -10,20 +10,17 @@ async function getUserInfo() {
     const secretKey = process.env.JWT_SECRET;
 
     if (!token) {
-        // Redirect to signup page if no token is found
         redirect('/signup');
-        return null; // Ensure function does not proceed further
+        return null; 
     }
 
     try {
         const decoded = jwt.verify(token, secretKey);
         return decoded; 
     } catch (error) {
-        // Optionally log the error for debugging purposes
         console.error('Invalid token', error);
-        // Redirect to signup page if token is invalid
         redirect('/signup');
-        return null; // Ensure function does not proceed further
+        return null; 
     }
 }
 

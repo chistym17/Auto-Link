@@ -1,22 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import getUserInfo from '../../lib/actions/getuserinfo';
-import withPrivateRoute from '../../components/privateroute';
 
 const Page = async () => {
     try {
-        // Fetch user info
         const userInfo = await getUserInfo();
-        // const userId = userInfo.userId || 1;
-
-        // Fetch zaps for the user
         const response = await axios.get('http://localhost:3001/getzaps', {
             params: { userId: 1 }
         });
 
         const zaps = response.data.zaps;
-
-        // If zaps are not found, return a message
         if (!zaps || zaps.length === 0) {
             return (
                 <div className="p-4">

@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { BsArrowRight } from "react-icons/bs";
-import { EmailSelector, SolanaSelector, DBSelector, availableActions, availableTriggers } from "./create/actions"; // Ensure DBSelector is imported
-import { AiOutlineCreditCard } from "react-icons/ai";
-import { Input } from "../../components/Input";
-import { PrimaryButton } from "../../components/buttons/PrimaryButton";
+import { EmailSelector, SolanaSelector, DBSelector, availableActions, availableTriggers } from "./create/actions"; 
+
 
 export function Modal({ index, onSelect, availableItems }: { index: number, onSelect: (props: null | { name: string; id: string; metadata: any; }) => void, availableItems: { id: string, name: string, image: string; }[] }) {
     const [step, setStep] = useState(0);

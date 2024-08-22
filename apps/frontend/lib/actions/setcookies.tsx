@@ -8,7 +8,7 @@ async function create(token) {
     value: token,              
     httpOnly: true,           
     path: '/',                
-    maxAge: 60 * 60 * 24 * 7,  
+    maxAge: 60 * 60 ,  
   })
 }
 

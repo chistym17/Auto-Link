@@ -1,8 +1,4 @@
-
 "use client";
-
-import { Appbar } from "../../../components/Appbar";
-import { Input } from "../../../components/Input";
 import { ZapCell } from "../../../components/ZapCell";
 import { PrimaryButton } from "../../../components/buttons/PrimaryButton";
 import axios from "axios";
@@ -10,19 +6,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Modal } from "../functions";
 import { availableActions, availableTriggers } from "./actions";
-import getUserInfo from "../../../lib/actions/getuserinfo";
 
-// const user = {
-//     name: "chisty",
-//     email: "chisty@gmail.com",
-//     avatar: '../../albert-dera-ILip77SbmOE-unsplash.jpg'
-// }
+
 
 const Page =  () => {
-
-
-    //  const user=await getUserInfo()
-
     const [selectedTrigger, setSelectedTrigger] = useState<{ id: string; name: string; actions: string[] }>();
     const [selectedActions, setSelectedActions] = useState<{
         index: number;
