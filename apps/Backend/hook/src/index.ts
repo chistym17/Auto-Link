@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3002;
 app.use(express.json());
 
 app.use(cors({
-    origin: '*', // Allow all origins
+    origin: '*',
 }));
 
 app.get('/', (req: Request, res: Response) => {
@@ -25,24 +25,21 @@ app.post("/hooks/catch/:userId/:zapId", async (req: Request, res: Response) => {
     console.log(body)
 
     try {
-        // Fetch the zap information to log the trigger metadata
         const zap = await prisma.zap.findUnique({
             where: { id: zapId },
             include: {
                 trigger: true,
-                actions:true // Include trigger information
+                actions: true
             }
         });
 
-       console.log(zap?.actions?.[0].metadata)
-       const bodydata=zap?.actions?.[0].metadata 
-
-        // Store the webhook data and create the necessary entries in the database
+        console.log(zap?.actions?.[0].metadata)
+        const bodydata = zap?.actions?.[0].metadata
         await prisma.$transaction(async tx => {
             const run = await tx.zapRun.create({
                 data: {
                     zapId: zapId,
-                    metadata: bodydata   //// ekhane body te problem ache
+                    metadata: bodydata
                 }
             });
 

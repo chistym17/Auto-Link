@@ -5,158 +5,107 @@ import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 require('dotenv').config();
-
 const app = express();
 const port = 3001;
-
-async function main() {
-  // Create available triggers
-  const triggers = [
-      { id: "trigger_1", name: "New Form Submission", image: "/images/form.png" },
-      { id: "trigger_2", name: "New Email Received", image: "/images/email.png" }
-  ];
-
-  for (const trigger of triggers) {
-      await prisma.availableTrigger.create({
-          data: {
-              id: trigger.id,
-              name: trigger.name,
-              image: trigger.image
-          }
-      });
-  }
-
-  // Create available actions
-  const actions = [
-      { id: "action_1", name: "Send Email", image: "/images/send_email.png" },
-      { id: "action_2", name: "Send Solana", image: "/images/solana.png" }
-  ];
-
-  for (const action of actions) {
-      await prisma.availableAction.create({
-          data: {
-              id: action.id,
-              name: action.name,
-              image: action.image
-          }
-      });
-  }
-
-  console.log('Available triggers and actions have been created.');
-}
-
-
-
 app.use(express.json());
 
 app.use(cors({
-  origin: '*', // Allow all origins
+    origin: '*',
 }));
 
 
 app.post('/signup', async (req: Request, res: Response) => {
-  const { email, password, name } = req.body;
+    const { email, password, name } = req.body;
 
-  if (!email || !password || !name) {
-    return res.status(400).json({ message: 'Missing required fields' });
-  }
-
-  try {
-    const existingUser = await prisma.user.findUnique({ where: { email: email } });
-    if (existingUser) {
-      return res.status(409).json({ message: 'User already exists' });
+    if (!email || !password || !name) {
+        return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    try {
+        const existingUser = await prisma.user.findUnique({ where: { email: email } });
+        if (existingUser) {
+            return res.status(409).json({ message: 'User already exists' });
+        }
 
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email: email,
-        password: hashedPassword,
-      },
-    });
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-
-
-    const token = jwt.sign(
-        { userId: user.id, email: user.email }, 
-        process.env.JWT_SECRET, 
-        { expiresIn: '1h' }
-      );
+        const user = await prisma.user.create({
+            data: {
+                name,
+                email: email,
+                password: hashedPassword,
+            },
+        });
 
 
-    res.status(201).json({ token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
+
+        const token = jwt.sign(
+            { userId: user.id, email: user.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+
+        res.status(201).json({ token });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 });
 
 
 
-// Create a new Zap
 app.post("/createzap", async (req, res) => {
-  const body = req.body;
+    const body = req.body;
 
-  try {
-      const { availableTriggerId, triggerMetadata, actions } = body;
+    try {
+        const { availableTriggerId, triggerMetadata, actions } = body;
+        const zapId = await prisma.$transaction(async (tx) => {
+            const zap = await tx.zap.create({
+                data: {
+                    userId: 1,
+                    triggerId: '',
+                    actions: {
+                        create: actions.map((action: any, index: number) => ({
+                            metadata: action.actionMetadata,
+                            sortingOrder: index,
+                            type: {
+                                connect: { id: action.availableActionId },
+                            },
+                        })),
+                    },
+                },
+            });
 
-      // Create zap and actions within a transaction
-      console.log(triggerMetadata,actions)
-      const zapId = await prisma.$transaction(async (tx) => {
-          // Create Zap
-          const zap = await tx.zap.create({
-              data: {
-                  userId: 1, // Replace with actual user ID
-                  triggerId: '', // This will be updated with the actual trigger ID later
-                  actions: {
-                      create: actions.map((action: any, index: number) => ({
-                          metadata: action.actionMetadata,
-                          sortingOrder: index,
-                          type: {
-                              connect: { id: action.availableActionId }, // Connect to the AvailableAction model
-                          },
-                      })),
-                  },
-              },
-          });
+            const trigger = await tx.trigger.create({
+                data: {
+                    zapId: zap.id,
+                    triggerId: availableTriggerId,
+                    metadata: triggerMetadata,
 
-          // Create Trigger
-          const trigger = await tx.trigger.create({
-              data: {
-                  zapId: zap.id,
-                  triggerId: availableTriggerId,
-                  metadata: triggerMetadata,
-                 
-              },
-          });
+                },
+            });
 
-          // Update Zap with triggerId
-          await tx.zap.update({
-              where: { id: zap.id },
-              data: { triggerId: trigger.id },
-          });
+            await tx.zap.update({
+                where: { id: zap.id },
+                data: { triggerId: trigger.id },
+            });
 
-          return zap.id;
-      });
+            return zap.id;
+        });
 
-        // Construct the webhook URL
-        const webhookUrl = `${req.protocol}://${req.get('host')}/hooks/catch/${1}/${zapId}`;
+        const webhookUrl = `http://localhost:3002/hooks/catch/1/${zapId}`;
 
-        // Send the URL back to the user
         res.json({ success: true, zapId, webhookUrl });
 
-      // res.json({ zapId });
-  } catch (error) {
-      console.error('Error creating zap:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
-  }
+    } catch (error) {
+        console.error('Error creating zap:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 });
 
-// Get all Zaps for a user
 app.get("/getzaps", async (req, res) => {
-    const id = req.query.userId; // Assuming `userId` is passed as a query parameter
+    const id = req.query.userId;
 
     const zaps = await prisma.zap.findMany({
         where: {
@@ -181,9 +130,8 @@ app.get("/getzaps", async (req, res) => {
     });
 });
 
-// Get a specific Zap by ID
 app.get("/:zapId", async (req, res) => {
-    const id = req.query.userId; // Assuming `userId` is passed as a query parameter
+    const id = req.query.userId;
     const zapId = req.params.zapId;
 
     const zap = await prisma.zap.findFirst({
@@ -211,18 +159,6 @@ app.get("/:zapId", async (req, res) => {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
 app.listen(port, () => {
-  console.log(`pbackend running at http://localhost:${port}`);
+    console.log(`pbackend running at http://localhost:${port}`);
 });
