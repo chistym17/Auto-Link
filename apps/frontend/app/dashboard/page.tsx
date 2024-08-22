@@ -14,7 +14,7 @@ const Page = async () => {
             return (
                 <div className="p-4">
                     <h2 className="text-2xl font-semibold">No Zaps Found</h2>
-                    <p>It looks like you haven't created any zaps yet.</p>
+                    <p>It looks like you haven&apos;t created any zaps yet.</p>
                 </div>
             );
         }

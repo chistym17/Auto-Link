@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import create from "../../lib/actions/setcookies";
 
-export default function() {
+export default function Signup() {
     const router = useRouter();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");

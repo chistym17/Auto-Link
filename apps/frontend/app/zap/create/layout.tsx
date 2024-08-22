@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <SideNav user={user} />
                     <div className="flex-1 flex flex-col">
                         <header className="bg-white shadow p-6">
-                            <h1 className="text-2xl font-bold text-gray-800">Let's Create Your First Zap!</h1>
+                            <h1 className="text-2xl font-bold text-gray-800">Let&apos;s Create Your First Zap!</h1>
                             <p className="text-gray-600">Follow the steps to automate your workflow seamlessly.</p>
                         </header>
                         <main className="flex-1 p-6">
