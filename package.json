@@ -20,7 +20,7 @@
     "start-processor": "npm run start --prefix apps/Backend/Processor",
     "start-worker": "npm run start --prefix apps/Backend/worker",
 
-    "build-frontend": "npm run build --prefix apps/frontend",
+    "build-frontend": "cd ./apps/frontend && npm run build",
     "build-hook": "npm run build --prefix apps/Backend/hook",
     "build-backend": "npm run build --prefix apps/Backend/primary-backend",
     "build-processor": "npm run build --prefix apps/Backend/Processor",
