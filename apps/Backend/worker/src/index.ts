@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { prisma } from './../../../../packages/database/src/client';
 import { Kafka } from 'kafkajs';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { sendEmail } from './sendemail';
 import { addUser, testConnection } from './updatedb';
 require('dotenv').config();
@@ -139,7 +139,7 @@ async function main() {
 
 
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req,res) => {
   res.send('Hello, World!');
 });
 

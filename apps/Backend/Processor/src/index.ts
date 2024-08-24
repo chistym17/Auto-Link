@@ -1,5 +1,5 @@
 import { prisma } from './../../../../packages/database/src/client';
-import express, { Request, Response } from 'express';
+import express from 'express';
 
 const app = express();
 const PORT = 3003;
@@ -53,7 +53,7 @@ main()
 
 
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req,res) => {
   res.send('Hello, TypeScript with Express!');
 });
 
