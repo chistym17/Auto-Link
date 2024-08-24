@@ -26,7 +26,7 @@
     "build-processor": "npm install && npm run build --prefix apps/Backend/Processor",
     "build-worker": "npm install && npm run build --prefix apps/Backend/worker",
     
-    "build-all": "npm-run-all -p  build-hook build-backend build-processor build-worker",
+    "build-all": "npm-run-all -p build-frontend build-hook build-backend build-processor build-worker",
     "begin": "npm-run-all -p start-frontend start-hook start-primary-backend "
   },
   "prisma": {
