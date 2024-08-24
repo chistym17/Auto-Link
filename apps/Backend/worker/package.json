@@ -16,6 +16,7 @@
     "axios": "^1.7.4",
     "database": "*",
     "dotenv": "^16.4.5",
+    "esbuild": "^0.23.1",
     "express": "^4.19.2",
     "kafkajs": "^2.2.4",
     "mailgun-js": "^0.22.0",

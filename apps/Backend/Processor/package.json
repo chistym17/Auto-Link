@@ -13,6 +13,7 @@
   "description": "",
   "dependencies": {
     "database": "*",
+    "esbuild": "^0.23.1",
     "express": "^4.19.2",
     "kafkajs": "^2.2.4",
     "ui": "*"
