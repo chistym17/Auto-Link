@@ -1,0 +1,61 @@
+version: '3'
+services:
+  user-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.user
+    image: chisty17/integrateit:user
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./user:/usr/src/app
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+
+  bankend-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    image: chisty17/integrateit:backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/usr/src/app
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+
+  hook-webhook:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.hook
+    image: chisty17/integrateit:hook
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./hook:/usr/src/app
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+
+  processor-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.processor
+    image: chisty17/integrateit:processor
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./processor:/usr/src/app
+    environment:
+      - DATABASE_URL=${DATABASE_URL} 
+
+  worker-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.worker
+    image: chisty17/integrateit:worker
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./worker:/usr/src/app
+    environment:
+      - DATABASE_URL=${DATABASE_URL}       
