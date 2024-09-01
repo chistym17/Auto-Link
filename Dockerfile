@@ -8,9 +8,9 @@ COPY apps ./apps
 COPY packages ./packages
 
 RUN npm install
-RUN cd packages/database && npx prisma generate && cd ../..
+RUN cd packages/database && npx prisma generate --schema=./prisma/schema.prisma && cd ../..
 
-RUN npm run build-frontend
-EXPOSE 3000
+RUN npm run build-backend
+EXPOSE 3001
 
-CMD ["npm", "run", "start-frontend"]
+CMD ["npm", "run", "start-backend"]

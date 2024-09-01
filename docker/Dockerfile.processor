@@ -8,8 +8,7 @@ COPY apps ./apps
 COPY packages ./packages
 
 RUN npm install
-RUN cd packages/database && npx prisma generate && cd ../..
-
+RUN cd packages/database && npx prisma generate --schema=./prisma/schema.prisma && cd ../..
 RUN npm run build-processor
 EXPOSE 3003
 

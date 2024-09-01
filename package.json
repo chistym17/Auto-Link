@@ -12,20 +12,17 @@
     "db:migrate:deploy": "turbo run db:migrate:deploy",
     "db:push": "turbo run db:push",
     "db:seed": "turbo run db:seed",
-    "generate":"cd packages/database && npx prisma generate && cd ../..",
-
+    "generate": "cd packages/database && npx prisma generate && cd ../..",
     "start-frontend": "npm run start --prefix apps/frontend",
     "start-hook": "npm run start --prefix apps/Backend/hook",
     "start-backend": "npm run start --prefix apps/Backend/primary-backend",
     "start-processor": "npm run start --prefix apps/Backend/Processor",
     "start-worker": "npm run start --prefix apps/Backend/worker",
-
     "build-frontend": "cd ./apps/frontend && npm run build",
     "build-hook": "npm install && npm run build --prefix apps/Backend/hook",
     "build-backend": "npm install && npm run build --prefix apps/Backend/primary-backend",
     "build-processor": "npm install && npm run build --prefix apps/Backend/Processor",
     "build-worker": "npm install && npm run build --prefix apps/Backend/worker",
-    
     "build-all": "npm-run-all -p build-frontend build-hook build-backend build-processor build-worker",
     "begin": "npm-run-all -p start-frontend start-hook start-primary-backend "
   },
@@ -42,12 +39,16 @@
     "prettier-plugin-tailwindcss": "^0.6.5",
     "turbo": "^2.0.11"
   },
-  
   "workspaces": [
-    "apps/*",
+    "apps/frontend",
+    "apps/Backend/primary-backend",
+    "apps/Backend/hook",
+    "apps/Backend/Processor",
+    "apps/Backend/worker",
     "packages/*"
   ],
   "devDependencies": {
+    "esbuild": "^0.23.1",
     "npm-run-all": "^4.1.5"
   }
 }

@@ -1,3 +1,7 @@
 packages:
-  - "apps/*"
+  - "apps/frontend"
+  - "apps/Backend/primary-backend"
+  - "apps/Backend/hook"
+  - "apps/Backend/Processor"
+  - "apps/Backend/worker"
   - "packages/*"
