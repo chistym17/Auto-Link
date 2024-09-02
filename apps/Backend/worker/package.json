@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "build": "npx esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js --external:express --external:cors --external:kafkajs --external:pg --external:nodemailer",
+    "build": "npx esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js",
     "start": "node dist/index.js"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^5.19.1",
     "@sendgrid/mail": "^8.1.3",
     "axios": "^1.7.4",
     "database": "*",
@@ -33,4 +34,3 @@
     "typescript": "^5.5.4"
   }
 }
-

@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^5.19.1",
     "@types/cors": "^2.8.17",
     "base-64": "^1.0.0",
     "bcryptjs": "^2.4.3",
